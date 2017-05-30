@@ -23,7 +23,7 @@ module.exports = {
     publicPath: '/static/'
   },
   module: {
-  	// loaders 則是放欲使用的 loaders，在這邊是使用 babel-loader 將所有 .js（這邊用到正則式）相關檔案（排除了 npm 安裝的套件位置 node_modules）轉譯成瀏覽器可以閱讀的 JavaScript。preset 則是使用的 babel 轉譯規則，這邊使用 react、es2015。若是已經單獨使用 .babelrc 作為 presets 設定的話，則可以省略 query
+    // loaders 則是放欲使用的 loaders，在這邊是使用 babel-loader 將所有 .js（這邊用到正則式）相關檔案（排除了 npm 安裝的套件位置 node_modules）轉譯成瀏覽器可以閱讀的 JavaScript。preset 則是使用的 babel 轉譯規則，這邊使用 react、es2015。若是已經單獨使用 .babelrc 作為 presets 設定的話，則可以省略 query
     loaders: [
       {
         test: /\.js$/,
@@ -33,6 +33,22 @@ module.exports = {
           presets: ['es2015', 'react'],
         },
       },
+      {
+        test: /\.css$/,
+        loader: 'style-loader'
+      }, {
+        test: /\.css$/,
+        loader: 'css-loader',
+        query: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      }/*{
+        test: /\.css$/, // Only .css files
+        loader: 'style!css' // Run both loaders
+      } 這語法會出錯 BREAKING CHANGE: It's no longer allowed to omit the '-loader' suffix when using loaders.
+                 You need to specify 'style-loader' instead of 'style',
+                 see https://webpack.js.org/guides/migrating/#automatic-loader-module-name-extension-removed*/
     ],
   },
   //添加我们的插件 会自动生成一个html文件

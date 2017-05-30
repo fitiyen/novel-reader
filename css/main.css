@@ -1,0 +1,41 @@
+.urlinput{
+    width : 300px
+}
+.leftDiv {
+    width: 30%;
+    float: left
+}
+.rightContentsDiv {
+    width: 69%;
+    float: left;
+    border: 1px solid black
+}
+.rightChapterDiv {
+    width: 69%;
+    float: left;
+    border: 1px solid red
+}
+.hidden {
+    display: none    
+}
+/*如果螢幕寬度為 500px 以下，就套用這些 css 設定*/
+@media screen and (max-width: 400px) {
+    .urlinput {
+        width : 70%;
+    }
+    .leftDiv {
+        width: 100%;
+    }
+    .rightContentsDiv {
+        width: 100%;
+        border: 1px solid black
+    }
+    .rightChapterDiv {
+        width: 100%;
+        border: 1px solid red
+    }
+    .hidden {
+        display: none    
+    }
+
+}

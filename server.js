@@ -56,7 +56,7 @@ app.get('/novelContents', function(req, res){
 app.get('/chapter', function(req, res){
     var url = req.query.url;
     axios.get(url).then(function(resA){
-        //res.data = html 的內容
+        //res.data 是 html 的內容
         var html = resA.data;
         //关闭 cheerio 中的 .html() 方法 转换实体编码的功能（2016-01-25 add）
         //var $ = cheerio.load(html, {decodeEntities: false});
@@ -66,6 +66,7 @@ app.get('/chapter', function(req, res){
         $("#content > div:last-of-type").each(function (i, e) {
             var $e = $(e);
             chapter = $e.text();
+            //chapter = $e.html();
         });
         var jdata = {chapter};
         

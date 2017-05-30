@@ -79,7 +79,7 @@ export default class View extends React.Component{
             this.moveTo(0);
         }
     }
-    
+    //unable to preventDefault touchstart https://segmentfault.com/a/1190000007621605
     onTouchStart(event){
         var touchObj = event.changedTouches[0];
         var obj = {};

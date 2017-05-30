@@ -1,53 +1,41 @@
 import React from 'react';
-import Axios from 'axios';
 
 export default class Chapter extends React.Component{
     constructor(props){
-        super(props);
-
-        this.state = {
-            content: ""
-        }
+        super(props);//chapter
+        this.goToContents = this.goToContents.bind(this);
+        this.goToPrev = this.goToPrev.bind(this);
+        this.goToNext = this.goToNext.bind(this);
     }
 
-    goChapter(idx){
-        var chapter = this.getChapterByContents(idx);
-        var url = chapter.contentUrl;
-        Axios.get('/chapter', {
-            params: {
-                url: url
-            }
-        }).then(function(res){
-            this.setState({chapter: res.data.chapter});
-            this.showNovelContents(false);
-        }) 
-    }
-
-    goTo(prev){
-        var currChapter = this.state.currChapter;
-        var contents = this.props.contents;
-        var idx = this.props.index + (prev ? -1: 1);
-        this.goChapter(idx);
-
-
+    goToContents(){
+        this.props.moveTo(0);
     }
 
     goToPrev(){
-        goTo(true);
+        this.props.moveTo(-1);
     }
 
     goToNext(){
-        goTo(false);
+        this.props.moveTo(1);
     }
 
     render(){
-        return <pre style={{whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontSize: '20px', textIndent: '30px', lineHeight: '40px', margin: '0 auto'}}>
-                    {this.state.chapter}
+        //
+        var content = this.props.chapter.content;
+        if (content){
+            content = content.replace(/\n/g, '\n　　').trim();
+        }
+        
+        return <div>
+                <pre style={{whiteSpace: 'pre-wrap', wordWrap: 'break-word', fontSize: '16px', lineHeight: '28px', margin: '0 auto'}}>
+                {content}
                 </pre>
-                <div>
-                    <button onClick={this.goToPrev}>前一章</button>
-                    <button onClick={this.onBack}>回目錄</button>
-                    <button onClick={this.goToNext}>下一章</button>
-                </div>
+            <div>
+                <button onClick={this.goToPrev}>前一章</button>
+                <button onClick={this.goToContents}>回目錄</button>
+                <button onClick={this.goToNext}>下一章</button>
+            </div>
+        </div>
     }
 }

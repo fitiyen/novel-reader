@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import Url from 'url';
+import CSS from '../css/main.css'
 
 export default class NovelsForm extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ export default class NovelsForm extends React.Component {
     render() {
         return (
             <div>
-                <input type='input' style={{ width: 300 + 'px' }} defaultValue={this.state.url} ref="urlInput" />
+                <input type='input' className={CSS.urlinput}  defaultValue={this.state.url} ref="urlInput" />
                 <button type='button' onClick={this.handleClick}>Add</button>
             </div>
         );
